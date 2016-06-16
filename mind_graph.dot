@@ -1,0 +1,74 @@
+digraph G {
+    "vagrant" [style=filled,color="LightSkyBlue"];
+    "coreos"; 
+    "kubernetes" [style=filled,color="LightSkyBlue"];
+    "docker";
+    "virtualbox" [style=filled,color="LightSkyBlue"];
+    "Vagrantfile" [style=filled,color="LightSkyBlue"];
+    "box images" [style=filled,color="LightSkyBlue"];
+    "coreos" [style=filled,color="LightSkyBlue"];
+    "cloud config" [style=filled,color="LightSkyBlue"];
+    "systemd" [style=filled,color="LightSkyBlue"];
+    "journald" [style=filled,color="LightSkyBlue"];
+    "journalctl" [style=filled,color="LightSkyBlue"];
+    "systemctl" [style=filled,color="LightSkyBlue"];
+    "systemd-analyze" [style=filled,color="LightSkyBlue"];
+    "systemctl" [style=filled,color="LightSkyBlue"];
+    "label" [style=filled,color="LightSkyBlue"];
+    "rc" [style=filled,color="LightSkyBlue"];
+    "networking" [style=filled,color="LightSkyBlue"];
+    "service" [style=filled,color="LightSkyBlue"];
+    "pod" [style=filled,color="LightSkyBlue"];
+    "node ip" [style=filled,color="LightSkyBlue"];
+    "pod ip" [style=filled,color="LightSkyBlue"];
+    "flanneld" [style=filled,color="LightSkyBlue"];
+    "etcd2" [style=filled,color="LightSkyBlue"];
+    "linux init"  [style=filled,color="LightSkyBlue"];
+    "sysvinit" [style=filled,color="LightSkyBlue"];
+    "UpStart" [style=filled,color="LightSkyBlue"];
+    "etcd2 discovery" [style=filled,color="LightSkyBlue"];
+    "TF" ;
+    "ceph" ;
+    "pex" ;
+    "fleet" ;
+
+    "vagrant" -> "virtualbox";
+    "vagrant" -> "Vagrantfile";
+    "vagrant" -> "box images";
+    "box images" -> "coreos";
+    "vagrant" -> "kubernetes";
+    "kubernetes" -> "pod";
+    "pod" -> "docker";
+    "pod" -> "pod ip";
+    "kubernetes" -> "node ip";
+    "kubernetes" -> "service";
+    "kubernetes" -> "label";
+    "kubernetes" -> "rc";
+    "kubernetes" -> "Load Balancer";
+    "kubernetes" -> "kubelet";
+    "kubernetes" -> "networking";
+    "networking" -> "flanneld";
+    "flanneld" -> "etcd2";
+    "flanneld" -> "flannel0";
+    "flanneld" -> "docker0";
+    "flanneld" -> "early-docker";
+    "coreos" -> "cloud config";
+    "coreos" -> "etcd2";
+    "etcd2" -> "etcd2 discovery";
+    "coreos" -> "flanneld";
+    "coreos" -> "systemd";
+    "coreos" -> "ceph";
+    "coreos" -> "pex";
+    "coreos" -> "ipex";
+    "coreos" -> "fleet";
+    "systemd" -> "systemctl";
+    "systemd" -> "systemd-analyze";
+    "systemd" -> "journald";
+    "journald" -> "journalctl";
+    "systemd" -> "linux init";
+    "linux init" -> "sysvinit";
+    "linux init" -> "UpStart";
+    "docker" -> "docker file"
+    "docker" -> "docker image"
+    "docker" -> "TF"
+}
