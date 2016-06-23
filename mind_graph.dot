@@ -27,16 +27,41 @@ digraph G {
     "sysvinit" [style=filled,color="LightSkyBlue"];
     "UpStart" [style=filled,color="LightSkyBlue"];
     "etcd2 discovery" [style=filled,color="LightSkyBlue"];
+"Provision" [style=filled,color="LightSkyBlue"];
+"provider" [style=filled,color="LightSkyBlue"];
+"VMs" [style=filled,color="LightSkyBlue"];
+"shell (install/run)" [style=filled,color="LightSkyBlue"];
+"file (copy config)" [style=filled,color="LightSkyBlue"];
+"http_proxy" [style=filled,color="LightSkyBlue"];
+"proxy in early-docker for flannel" [style=filled,color="LightSkyBlue"];
+"vagrant reload --provision" [style=filled,color="LightSkyBlue"];
+"Synced folder" [style=filled,color="LightSkyBlue"];
+"VM networking" [style=filled,color="LightSkyBlue"];
+"forwarded_port" [style=filled,color="LightSkyBlue"];
+"build box image" [style=filled,color="LightSkyBlue"];
+"share box image" [style=filled,color="LightSkyBlue"];
+"units" [style=filled,color="LightSkyBlue"];
+"drop-in units" [style=filled,color="LightSkyBlue"];
+"early-docker" [style=filled,color="LightSkyBlue"];
+"docker" [style=filled,color="LightSkyBlue"];
+"docker image" [style=filled,color="LightSkyBlue"];
+"docker daemon" [style=filled,color="LightSkyBlue"];
     "TF" ;
     "ceph" ;
     "pex" ;
     "fleet" ;
 
-    "vagrant" -> "virtualbox";
-    "vagrant" -> "Vagrantfile";
-    "vagrant" -> "box images";
-    "box images" -> "coreos";
+"vagrant" -> "Vagrantfile" -> "ruby";
+"vagrant" -> "provider" -> "VMs" -> virtualbox; 
+"vagrant" -> "Provision";
+"Provision" -> "shell (install/run)";
+"Provision" -> "file (copy config)";
+"vagrant" -> "Synced folder";
+"vagrant" -> "VM networking" ->forwarded_port;
+"Provision" -> "vagrant reload --provision";
+    "virtualbox" -> "coreos";
     "vagrant" -> "kubernetes";
+"vagrant" -> "http_proxy" -> "proxy in early-docker for flannel";
     "kubernetes" -> "pod";
     "pod" -> "docker";
     "pod" -> "pod ip";
@@ -51,11 +76,11 @@ digraph G {
     "flanneld" -> "etcd2";
     "flanneld" -> "flannel0";
     "flanneld" -> "docker0";
-    "flanneld" -> "early-docker";
     "coreos" -> "cloud config";
-    "coreos" -> "etcd2";
     "etcd2" -> "etcd2 discovery";
-    "coreos" -> "flanneld";
+"coreos" -> "units" -> "drop-in units";
+units -> "early-docker";
+    "coreos" -> "rkt";
     "coreos" -> "systemd";
     "coreos" -> "ceph";
     "coreos" -> "pex";
@@ -69,6 +94,10 @@ digraph G {
     "linux init" -> "sysvinit";
     "linux init" -> "UpStart";
     "docker" -> "docker file"
+"docker" -> "docker daemon"
     "docker" -> "docker image"
     "docker" -> "TF"
+"VMs" -> "box images";
+"box images" -> "build box image";
+"box images" -> "share box image";
 }
