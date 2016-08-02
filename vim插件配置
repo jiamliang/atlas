@@ -1,0 +1,18 @@
+# 配置Vim插件
+配置vim编辑器的插件，支持vim-go
+
+- vim +lua：
+sudo apt-get build-dep vim-gnome
+- 安装spf13-vim：
+curl https://j.mp/spf13-vim3 -L > spf13-vim.sh && sh spf13-vim.sh
+- 安装vim-go：
+vim .vimrc.bundles.local
+# 添加下面一句话
+Bundle 'fatih/vim-go'
+# 在vim里面执行命令：
+ :GoUpdateBinaries 
+
+# 退出vim后，在命令行下执行：
+vim +BundleInstall!  +q
+
+Done！
