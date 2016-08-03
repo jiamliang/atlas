@@ -1,0 +1,10 @@
+# Build rbd-docker-plugin on Ubuntu 16.04
+
+这是一个操作步骤记录，随时更新
+
+## install LIBRADOS
+
+```
+sudo apt-get install librados-dev
+sudo apt-get install librbd-dev
+```
